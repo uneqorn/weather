@@ -1,0 +1,37 @@
+# Let's say you want to write a script in python that is able to pull the current weather in any location that is specified in a text field (with auto-complete on the location names by city, state, country).
+
+# Here is a script that will do this using the OpenWeatherMap API:
+
+import requests
+import json
+
+# OpenWeatherMap API key
+api_key = 'your_api_key_here'
+
+# base URL for the OpenWeatherMap API
+base_url = 'https://api.openweathermap.org/data/2.5/weather?'
+
+# function to get the weather data for a specific location
+def get_weather(location):
+  # build the full URL for the request
+  full_url = base_url + 'q=' + location + '&appid=' + api_key
+  
+  # make the request
+  response = requests.get(full_url)
+  
+  # if the request was successful, parse the data and return it
+  if response.status_code == 200:
+    data = json.loads(response.text)
+    return data
+  # if the request failed, return None
+  else:
+    return None
+
+# test the function
+location = 'Seattle, WA, USA'
+weather_data = get_weather(location)
+
+if weather_data is not None:
+  print(f'The current temperature in {location} is {weather_data["main"]["temp"]} degrees Fahrenheit.')
+else:
+  print('Unable to get weather data for the specified location.')
