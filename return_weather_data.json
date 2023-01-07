@@ -1,0 +1,9 @@
+# how may i return the data as a JSON object or as an HTML string?
+# To return the weather data as a JSON object, you can modify the get_weather() function to return the data directly:
+
+def get_weather(location):
+  # ...
+  if response.status_code == 200:
+    data = json.loads(response.text)
+    return data
+  # ...
