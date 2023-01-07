@@ -1,0 +1,16 @@
+# To return the data as an HTML string, you can create an HTML template and use the format() method to insert the weather data into the template:
+
+def get_weather(location):
+  # ...
+  if response.status_code == 200:
+    data = json.loads(response.text)
+    
+    # create an HTML template
+    html = '''
+    <p>The current temperature in {location} is {temp} degrees Fahrenheit.</p>
+    <p>The weather conditions are: {conditions}</p>
+    '''
+    
+    # format the template with the data
+    return html.format(location=location, temp=data['main']['temp'], conditions=data['weather'][0]['description'])
+  # ...
