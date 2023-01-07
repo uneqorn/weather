@@ -1,0 +1,21 @@
+# Next, add a submit event listener to the form that sends an AJAX request when the form is submitted:
+
+const form = document.getElementById('location-form');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();  // prevent the form from submitting
+
+  // get the value of the input field
+  const location = form.elements.location.value;
+  
+  // send the AJAX request
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/get-weather');
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      // handle the response from the server here
+    }
+  };
+  xhr.send(`location=${location}`);
+});
